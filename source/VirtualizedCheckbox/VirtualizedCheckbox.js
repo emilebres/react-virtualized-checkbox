@@ -60,32 +60,31 @@ class CheckboxGroup extends Component {
       }
       unique[options[i][labelKey]] = 0
     }
-    console.log(unique, distinct)
-    console.log(options, labelKey)
     return distinct
   }
 
   onChange (box) {
-    if (box[this.state.valueKey] === '#ALL#') {
-      if (this.state.boxes[0].checked) {
-        const newBoxes = this.state.boxes.map(box => Object.assign(box, {checked: false}))
+    const {valueKey, labelKey, boxes, checkedCounter} = this.state
+    if (box[valueKey] === '#ALL#') {
+      if (boxes[0].checked) {
+        const newBoxes = boxes.map(box => ({...box, checked: false}))
         this.setState({
           boxes: newBoxes,
           checkedCounter: 0
         })
       } else {
-        const newBoxes = this.state.boxes.map(box => Object.assign(box, {checked: true}))
+        const newBoxes = boxes.map(box => ({...box, checked: true}))
         this.setState({
           boxes: newBoxes,
-          checkedCounter: this.state.boxes.length - 1
+          checkedCounter: boxes.length - 1
         })
       }
     } else {
-      const newBoxes = this.state.boxes.map(bx => bx[this.state.labelKey] === box[this.state.labelKey] ? {...box, checked: !box.checked} : bx)
-      const newCheckedCounter = box.checked ? this.state.checkedCounter - 1 : this.state.checkedCounter + 1
-      if (this.state.boxes[0].checked) {
+      const newBoxes = boxes.map(bx => bx[labelKey] === box[labelKey] ? {...box, checked: !box.checked} : bx)
+      const newCheckedCounter = box.checked ? checkedCounter - 1 : checkedCounter + 1
+      if (boxes[0].checked) {
         newBoxes[0].checked = false
-      } else if (newCheckedCounter === this.state.boxes.length - 1) {
+      } else if (newCheckedCounter === boxes.length - 1) {
         newBoxes[0].checked = true
       }
       this.setState({
@@ -96,18 +95,20 @@ class CheckboxGroup extends Component {
   }
 
   checkedBoxes () {
-    if (this.state.boxes[0].checked) {
-      return this.state.boxes.slice(1).map(box => box[this.state.labelKey])
+    const {labelKey, boxes} = this.state
+    if (boxes[0].checked) {
+      return boxes.slice(1).map(box => box[labelKey])
     } else {
-      return this.state.boxes.slice(1)
+      return boxes.slice(1)
         .filter(box => box.checked)
-        .map(box => box[this.state.labelKey])
+        .map(box => box[labelKey])
     }
   }
 
   render () {
     const {maxHeight, rowHeight} = this.props
-    const height = Math.min(maxHeight, this.state.boxes.length * rowHeight)
+    const {boxes} = this.state
+    const height = Math.min(maxHeight, boxes.length * rowHeight)
     return (
       <div>
         <AutoSizer disableHeight>
@@ -115,10 +116,10 @@ class CheckboxGroup extends Component {
             <VirtualScroll
               height={height}
               width={width}
-              rowCount={this.state.boxes.length}
+              rowCount={boxes.length}
               rowHeight={rowHeight}
               rowRenderer={this.checkboxRenderer}
-              boxes={this.state.boxes}
+              boxes={boxes}
             />
         }
         </AutoSizer>
@@ -129,8 +130,9 @@ class CheckboxGroup extends Component {
   }
 
   checkboxRenderer ({index, isScrolling}) {
-    const box = this.state.boxes[index]
-    return <Checkbox key={box[this.state.labelKey]} onChange={() => this.onChange(box)} label={box[this.state.labelKey]} {...box} />
+    const {labelKey, boxes} = this.state
+    const box = boxes[index]
+    return <Checkbox key={box[labelKey]} onChange={() => this.onChange(box)} label={box[labelKey]} {...box} />
   }
 }
 
