@@ -1,10 +1,5 @@
 # React Virtualized Checkbox
 
-![NPM version](https://img.shields.io/npm/v/react-virtualized-checkbox.svg?style=flat)
-![NPM license](https://img.shields.io/npm/l/react-virtualized-checkbox.svg?style=flat)
-![NPM total downloads](https://img.shields.io/npm/dt/react-virtualized-checkbox.svg?style=flat)
-![NPM monthly downloads](https://img.shields.io/npm/dm/react-virtualized-checkbox.svg?style=flat)
-
 ### Demo available here: http://emilebres.github.io/react-virtualized-checkbox/
 
 ![react-virtualized-checkbox-demo](https://cloud.githubusercontent.com/assets/6179178/15900554/2e509cac-2da0-11e6-8c3a-a7b261eca06b.gif)
