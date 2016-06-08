@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {VirtualScroll, AutoSizer} from 'react-virtualized'
+import 'react-virtualized/styles.css'
 
 const Checkbox = ({onChange, checked, label}) => (
   <label>
