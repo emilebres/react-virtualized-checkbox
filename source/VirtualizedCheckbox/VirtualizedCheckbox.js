@@ -35,13 +35,26 @@ class CheckboxGroup extends Component{
   constructor(props){
     super(props);
     this.checkboxRenderer = this.checkboxRenderer.bind(this);
-    const boxes = [{code: '#ALL#', name:'(Select all)', indeterminate: true}, ...props.boxes];
+    const distinctBoxes = this.getDistinctFast(props.boxes);
+    const boxes = [{code: '#ALL#', name:'(Select all)', indeterminate: true}, ...distinctBoxes];
     const checkedCounter = props.boxes.filter(box => box.checked).length;
     this.state = {
       boxes: boxes,
       checkedCounter
     };
     this.checkedBoxes = this.checkedBoxes.bind(this);
+  }
+
+  getDistinctFast(boxes){
+    var unique = {};
+    var distinct = [];
+    for( var i in boxes ){
+     if( typeof(unique[boxes[i].name]) == "undefined"){
+      distinct.push(boxes[i]);
+     }
+     unique[boxes[i].name] = 0;
+    }
+    return distinct
   }
 
   onChange(box){
@@ -106,6 +119,7 @@ class CheckboxGroup extends Component{
               rowHeight={rowHeight}
               rowRenderer={this.checkboxRenderer}
               boxes={this.state.boxes}
+              onScroll={({ clientHeight, scrollHeight, scrollTop }) => console.log(scrollTop)}
             />
         }
         </AutoSizer>
