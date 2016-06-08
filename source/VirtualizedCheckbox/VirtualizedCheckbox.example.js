@@ -29,6 +29,7 @@ export default class VirtualizedCheckboxExample extends Component {
         <div>
           <CheckboxGroup
             options={this.props.cityData}
+            labelKey={'name'}
             onOk={(args) => this.setState({result: args})}
             onCancel={() => this.setState({result: ['checkboxes selection canceled']})}
           />

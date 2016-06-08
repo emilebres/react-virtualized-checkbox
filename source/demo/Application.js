@@ -10,23 +10,16 @@ class Application extends Component {
     return (
       <div>
         <header className={styles.header}>
-          <h1 className={styles.container}>
-            React Virtualized Checkbox
-          </h1>
-
+          <h1 className={styles.container}>React Virtualized Checkbox</h1>
           <div className={styles.container}>
             Checkbox group component powered by react-virtualized
           </div>
-
           <div className={styles.container}>
             Docs and code on <a className={styles.headerLink} href='https://github.com/emilebres/react-virtualized-checkbox/'>GitHub</a>.
           </div>
         </header>
-
         <section className={styles.container}>
-          <VirtualizedCheckboxExample
-            cityData={cityData}
-          />
+          <VirtualizedCheckboxExample cityData={cityData} />
         </section>
       </div>
     )
@@ -34,7 +27,7 @@ class Application extends Component {
 }
 
 ReactDOM.render(
-  <Application/>,
+  <Application />,
   document.getElementById('root')
 )
 

@@ -1,61 +1,72 @@
 import React, {Component, PropTypes} from 'react'
 import {VirtualScroll, AutoSizer} from 'react-virtualized'
 
-const Checkbox = ({onChange, checked, name}) => (
-      <label>
-        <input
-          type='checkbox'
-          onChange={() => onChange()}
-          checked={checked}
-        />
-      {name}
-      </label>
-    )
+const Checkbox = ({onChange, checked, label}) => (
+  <label>
+    <input
+      type='checkbox'
+      onChange={() => onChange()}
+      checked={checked || false}
+    />
+  {label}
+  </label>
+  )
 
 class CheckboxGroup extends Component {
 
-  static propTypes = {
+  static propTypes ={
     options: PropTypes.array.isRequired,
+    labelKey: PropTypes.string.isRequired,
+    valueKey: PropTypes.string.isRequired,
     onOk: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     maxHeight: PropTypes.number.isRequired,
     rowHeight: PropTypes.number.isRequired
-  };
+  }
 
   static defaultProps = {
     maxHeight: 300,
     rowHeight: 30,
     onOk: () => null,
-    onCancel: () => null
-  };
+    onCancel: () => null,
+    labelKey: 'label',
+    valueKey: 'value'
+  }
 
   constructor (props) {
     super(props)
+    const {options, labelKey, valueKey} = props
     this.checkboxRenderer = this.checkboxRenderer.bind(this)
-    const distinctBoxes = this.getDistinctFast(props.options)
-    const boxes = [{code: '#ALL#', name: '(Select all)', indeterminate: true}, ...distinctBoxes]
-    const checkedCounter = distinctBoxes.filter(box => box.checked).length
+    var allBox = {}
+    allBox[valueKey] = '#ALL#'
+    allBox[labelKey] = '(Select all)'
+    const boxes = [allBox, ...this.getDistinctFast(options, labelKey)]
+    const checkedCounter = boxes.filter(box => box.checked).length
     this.state = {
       boxes: boxes,
-      checkedCounter
+      checkedCounter,
+      valueKey,
+      labelKey
     }
     this.checkedBoxes = this.checkedBoxes.bind(this)
   }
 
-  getDistinctFast (boxes) {
+  getDistinctFast (options, labelKey) {
     var unique = {}
     var distinct = []
-    for (var i in boxes) {
-      if (typeof (unique[boxes[i].name]) === 'undefined') {
-        distinct.push(boxes[i])
+    for (var i in options) {
+      if (typeof (unique[options[i][labelKey]]) === 'undefined') {
+        distinct.push(options[i])
       }
-      unique[boxes[i].name] = 0
+      unique[options[i][labelKey]] = 0
     }
+    console.log(unique, distinct)
+    console.log(options, labelKey)
     return distinct
   }
 
   onChange (box) {
-    if (box.code === '#ALL#') {
+    if (box[this.state.valueKey] === '#ALL#') {
       if (this.state.boxes[0].checked) {
         const newBoxes = this.state.boxes.map(box => Object.assign(box, {checked: false}))
         this.setState({
@@ -70,7 +81,7 @@ class CheckboxGroup extends Component {
         })
       }
     } else {
-      const newBoxes = this.state.boxes.map(bx => bx.name === box.name ? {...box, checked: !box.checked} : bx)
+      const newBoxes = this.state.boxes.map(bx => bx[this.state.labelKey] === box[this.state.labelKey] ? {...box, checked: !box.checked} : bx)
       const newCheckedCounter = box.checked ? this.state.checkedCounter - 1 : this.state.checkedCounter + 1
       if (this.state.boxes[0].checked) {
         newBoxes[0].checked = false
@@ -86,11 +97,11 @@ class CheckboxGroup extends Component {
 
   checkedBoxes () {
     if (this.state.boxes[0].checked) {
-      return this.state.boxes.slice(1).map(box => box.name)
+      return this.state.boxes.slice(1).map(box => box[this.state.labelKey])
     } else {
       return this.state.boxes.slice(1)
         .filter(box => box.checked)
-        .map(box => box.name)
+        .map(box => box[this.state.labelKey])
     }
   }
 
@@ -108,19 +119,18 @@ class CheckboxGroup extends Component {
               rowHeight={rowHeight}
               rowRenderer={this.checkboxRenderer}
               boxes={this.state.boxes}
-              overscanRowCount={0}
             />
         }
         </AutoSizer>
-        <input type='button' value='Ok' onClick={() => this.props.onOk(this.checkedBoxes())}/>
-        <input type='button' value='Cancel' onClick={() => this.props.onCancel()}/>
+        <input type='button' value='Ok' onClick={() => this.props.onOk(this.checkedBoxes())} />
+        <input type='button' value='Cancel' onClick={() => this.props.onCancel()} />
       </div>
     )
   }
 
   checkboxRenderer ({index, isScrolling}) {
     const box = this.state.boxes[index]
-    return <Checkbox key={box.name} onChange={() => this.onChange(box)} {...box} />
+    return <Checkbox key={box[this.state.labelKey]} onChange={() => this.onChange(box)} label={box[this.state.labelKey]} {...box} />
   }
 }
 
