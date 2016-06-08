@@ -19,10 +19,11 @@ class Checkbox extends Component{
 class CheckboxGroup extends Component{
 
   static propTypes = {
-    maxHeight: PropTypes.number.isRequired,
-    rowHeight: PropTypes.number.isRequired,
+    options: PropTypes.array.isRequired,
     onOk: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
+    maxHeight: PropTypes.number.isRequired,
+    rowHeight: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -35,9 +36,9 @@ class CheckboxGroup extends Component{
   constructor(props){
     super(props);
     this.checkboxRenderer = this.checkboxRenderer.bind(this);
-    const distinctBoxes = this.getDistinctFast(props.boxes);
+    const distinctBoxes = this.getDistinctFast(props.options);
     const boxes = [{code: '#ALL#', name:'(Select all)', indeterminate: true}, ...distinctBoxes];
-    const checkedCounter = props.boxes.filter(box => box.checked).length;
+    const checkedCounter = distinctBoxes.filter(box => box.checked).length;
     this.state = {
       boxes: boxes,
       checkedCounter
