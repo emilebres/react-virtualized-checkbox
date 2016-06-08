@@ -12,7 +12,8 @@ export default class VirtualizedCheckboxExample extends Component {
     super(props)
 
     this.state = {
-      result: ['']
+      results: undefined,
+      canceled: false
     }
   }
 
@@ -30,17 +31,41 @@ export default class VirtualizedCheckboxExample extends Component {
           <CheckboxGroup
             options={this.props.cityData}
             labelKey={'name'}
-            onOk={(args) => this.setState({result: args})}
-            onCancel={() => this.setState({result: ['checkboxes selection canceled']})}
+            onOk={(args) => this.setState({results: args, canceled: false})}
+            onCancel={() => this.setState({results: [], canceled: true})}
           />
         </div>
-        <div>
-          <h4 className={styles.header}>
-           Results
-          </h4>
-          {this.state.result.join(' ')}
-        </div>
+        <Results canceled={this.state.canceled} results={this.state.results} />
       </div>
     )
   }
+}
+
+const Results = ({canceled, results}) => {
+  let message
+  if (canceled) {
+    message = <div>Selection canceled</div>
+  } else {
+    if (!results) {
+      message = <div></div>
+    } else {
+      message = (
+        <div>
+          <div>
+            {results.length} option{results.length > 1 ? 's' : ''} selected.
+          </div>
+          <div>
+            {results.join(' ')}
+          </div>
+        </div>
+    ) }
+  }
+  return (
+    <div>
+      <h4 className={styles.header}>
+       Results
+      </h4>
+      {message}
+    </div>
+  )
 }

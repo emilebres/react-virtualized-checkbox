@@ -68,8 +68,8 @@ class MyCheckbox extends Component {
 
 | Property | Type | Description |
 |:---|:---|:---|
-| options | `PropTypes.array` | Options to choose from. Can be an array of strings or an array of objects. |
-| onOk | `PropTypes.func` | Callback called when the _Ok_ button is clicked. Takes the selected option labels as arguments. |
+| options | `PropTypes.array` | Options to choose from; can be an array of strings or an array of objects. |
+| onOk | `PropTypes.func` | Callback called when the _Ok_ button is clicked; takes the selected option labels as arguments. |
 | onCancel | `PropTypes.func` | Callback called when the _Cancel_ is clicked. |
 
 The additional parameters introduced by _react-virtualized-checkbox_ are optional. They are:
