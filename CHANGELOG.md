@@ -2,7 +2,7 @@ Changelog
 ------------
 
 ##### 0.0.1
-Initial release.
+Modified height props.
 
 ##### 0.0.0
-Reserved NPM package name.
+Initial release.
