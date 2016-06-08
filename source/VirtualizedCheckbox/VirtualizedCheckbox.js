@@ -10,7 +10,7 @@ class Checkbox extends Component{
           onChange={() => this.props.onChange()}
           checked={this.props.checked}
         />
-        {this.props.label}
+      {this.props.name}
       </label>
     )
   }
@@ -35,7 +35,7 @@ class CheckboxGroup extends Component{
   constructor(props){
     super(props);
     this.checkboxRenderer = this.checkboxRenderer.bind(this);
-    const boxes = [{name: '#ALL#', label:'(Select all)', indeterminate: true}, ...props.boxes];
+    const boxes = [{code: '#ALL#', name:'(Select all)', indeterminate: true}, ...props.boxes];
     const checkedCounter = props.boxes.filter(box => box.checked).length;
     this.state = {
       boxes: boxes,
@@ -45,7 +45,7 @@ class CheckboxGroup extends Component{
   }
 
   onChange(box){
-    if (box.name ==='#ALL#'){
+    if (box.code ==='#ALL#'){
       if(this.state.boxes[0].checked){
         const newBoxes = this.state.boxes.map(box => Object.assign(box, {checked:false}));
         this.setState({
@@ -79,12 +79,12 @@ class CheckboxGroup extends Component{
 
   checkedBoxes(){
     if(this.state.boxes[0].checked){
-      return this.state.boxes.slice(1).map(box => box.label)
+      return this.state.boxes.slice(1).map(box => box.name)
     }
     else {
       return this.state.boxes.slice(1)
         .filter(box => box.checked)
-        .map(box => box.label)
+        .map(box => box.name)
     }
   }
 

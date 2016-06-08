@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import CheckboxGroup from './CheckboxGroup';
+import React, { Component, PropTypes } from 'react';
+import CheckboxGroup from './VirtualizedCheckbox';
 import styles from './VirtualizedCheckbox.example.css'
 
 
@@ -29,13 +29,16 @@ export default class VirtualizedCheckboxExample extends Component {
         </div>
         <div>
           <CheckboxGroup
-            boxes={boxes}
+            boxes={this.props.cityData}
             onOk={(args) => this.setState({result:args})}
-            onCancel={() => this.setState({result: ["checkbox selections canceled"]})}
+            onCancel={() => this.setState({result: ["checkboxes selection canceled"]})}
           />
         </div>
         <div>
-          Results: {...this.state.result}
+          <h4 className={styles.header}>
+           Results
+          </h4>
+          {this.state.result.join(' ')}
         </div>
       </div>
     );
