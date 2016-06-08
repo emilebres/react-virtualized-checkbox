@@ -27,7 +27,7 @@ export default class VirtualizedCheckboxExample extends Component {
         <div className={styles.description}>
          Displays a list of the 1,000 largest cities in the world.
         </div>
-        <div>
+        <div style={{height: 300}}>
           <CheckboxGroup
             options={this.props.cityData}
             labelKey={'name'}

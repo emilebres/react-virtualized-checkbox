@@ -113,21 +113,25 @@ class CheckboxGroup extends Component {
     const {boxes} = this.state
     const height = Math.min(maxHeight, boxes.length * rowHeight)
     return (
-      <div>
-        <AutoSizer disableHeight>
-          {({width}) =>
-            <VirtualScroll
-              height={height}
-              width={width}
-              rowCount={boxes.length}
-              rowHeight={rowHeight}
-              rowRenderer={this._checkboxRenderer}
-              boxes={boxes}
-            />
+      <div style={{height}}>
+        <AutoSizer>
+          {({width, height}) =>
+            <div>
+              <VirtualScroll
+                height={height}
+                width={width}
+                rowCount={boxes.length}
+                rowHeight={rowHeight}
+                rowRenderer={this._checkboxRenderer}
+                boxes={boxes}
+              />
+              <div style={{display: 'flex', width}}>
+                <input type='button' value='Ok' onClick={() => this.props.onOk(this.checkedBoxes())} />
+                <input type='button' value='Cancel' onClick={() => this.props.onCancel()} />
+              </div>
+            </div>
         }
         </AutoSizer>
-        <input type='button' value='Ok' onClick={() => this.props.onOk(this.checkedBoxes())} />
-        <input type='button' value='Cancel' onClick={() => this.props.onCancel()} />
       </div>
     )
   }
