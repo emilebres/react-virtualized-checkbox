@@ -1,6 +1,6 @@
 {
   "name": "react-virtualized-checkbox",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Checkbox group component with virtualization for large number of options",
   "main": "dist/commonjs/index.js",
   "jsnext:main": "dist/es/index.js",

@@ -44,6 +44,7 @@ class CheckboxGroup extends Component {
       ? options.map(option => ({label: option, value: option})) : options
     const boxes = [allBox, ...this.getDistinctFast(objectOptions, labelKey)]
     const checkedCounter = boxes.filter(box => box.checked).length
+    if (checkedCounter === boxes.length - 1) { boxes[0].checked = true }
     this.state = {
       boxes: boxes,
       checkedCounter,

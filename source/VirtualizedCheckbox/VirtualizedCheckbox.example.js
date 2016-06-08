@@ -29,7 +29,7 @@ export default class VirtualizedCheckboxExample extends Component {
         </div>
         <div style={{height: 300}}>
           <CheckboxGroup
-            options={this.props.cityData}
+            options={this.props.cityData.map(opt => ({...opt, checked: true}))}
             labelKey={'name'}
             onOk={(args) => this.setState({results: args, canceled: false})}
             onCancel={() => this.setState({results: [], canceled: true})}
