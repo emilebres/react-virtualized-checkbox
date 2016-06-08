@@ -1,6 +1,6 @@
 {
   "name": "react-virtualized-checkbox",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Checkbox group component with virtualization for large number of options",
   "main": "dist/commonjs/index.js",
   "jsnext:main": "dist/es/index.js",
@@ -111,6 +111,7 @@
     "react-addons-shallow-compare": "^15.0.2",
     "react-addons-test-utils": "^0.14.3",
     "react-dom": "^15.0.0",
+    "react-resizable": "^1.4.1",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.2",
     "redbox-react": "^1.0.1",

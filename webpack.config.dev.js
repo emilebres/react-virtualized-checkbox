@@ -41,7 +41,7 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: ['style', 'css?importLoaders=1'],
-        include: path.join(__dirname, 'node_modules/react-virtualized/styles.css')
+        include: path.join(__dirname, 'node_modules')
       }
     ]
   },
