@@ -7,8 +7,7 @@
 
 ### Demos available here: http://bvaughn.github.io/react-virtualized-checkbox/
 
-![react-virtualized-checkbox example](https://cloud.githubusercontent.com/assets/29597/14285960/46d733a6-fb02-11e5-884a-e349eb462704.gif)
-
+![react-virtualized-checkbox-demo](https://cloud.githubusercontent.com/assets/6179178/15900554/2e509cac-2da0-11e6-8c3a-a7b261eca06b.gif)
 ## Getting started
 
 Install `react-virtualized-checkbox` using npm.
