@@ -1,53 +1,44 @@
-# React Virtualized Select
+# React Virtualized Checkbox
 
-![NPM version](https://img.shields.io/npm/v/react-virtualized-select.svg?style=flat)
-![NPM license](https://img.shields.io/npm/l/react-virtualized-select.svg?style=flat)
-![NPM total downloads](https://img.shields.io/npm/dt/react-virtualized-select.svg?style=flat)
-![NPM monthly downloads](https://img.shields.io/npm/dm/react-virtualized-select.svg?style=flat)
-[![PayPal donate button](https://img.shields.io/badge/paypal-donate-lightgray.svg?style=flat)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5CVMYQKVPZC72)
-[![Patreon donate button](https://img.shields.io/badge/patreon-donate%20once-lightgray.svg?style=flat)](https://www.patreon.com/user?u=2979769)
+![NPM version](https://img.shields.io/npm/v/react-virtualized-checkbox.svg?style=flat)
+![NPM license](https://img.shields.io/npm/l/react-virtualized-checkbox.svg?style=flat)
+![NPM total downloads](https://img.shields.io/npm/dt/react-virtualized-checkbox.svg?style=flat)
+![NPM monthly downloads](https://img.shields.io/npm/dm/react-virtualized-checkbox.svg?style=flat)
 
-### Demos available here: http://bvaughn.github.io/react-virtualized-select/
+### Demos available here: http://bvaughn.github.io/react-virtualized-checkbox/
 
-![react-virtualized-select example](https://cloud.githubusercontent.com/assets/29597/14285960/46d733a6-fb02-11e5-884a-e349eb462704.gif)
+![react-virtualized-checkbox example](https://cloud.githubusercontent.com/assets/29597/14285960/46d733a6-fb02-11e5-884a-e349eb462704.gif)
 
 ## Getting started
 
-Install `react-virtualized-select` using npm.
+Install `react-virtualized-checkbox` using npm.
 
 ```shell
-npm install react-virtualized-select --save
+npm install react-virtualized-checkbox --save
 ```
 
 ES6, CommonJS, and UMD builds are available with each distribution.
 For example:
 
 ```js
-// Make sure to import default styles.
-// This only needs to be done once; probably during your application's bootstrapping process.
-import 'react-virtualized-select/styles.css'
-
-// Then import the virtualized Select HOC
-import VirtualizedSelect from 'react-virtualized-select'
+import VirtualizedCheckbox from 'react-virtualized-checkbox'
 ```
 
 Alternately you can load a global-friendly UMD build:
 
 ```html
-<link rel="stylesheet" href="path-to-react-virtualized-select/styles.css">
-<script src="path-to-react-virtualized-select/dist/umd/react-virtualized-select.js"></script>
+<script src="path-to-react-virtualized-checkbox/dist/umd/react-virtualized-checkbox.js"></script>
 ```
 
 ## Simple Example
 
-_react-select-virtualized_ works just like _react-select_. You pass it an array of options, along with any other parameters supported by the [`Select` component](https://github.com/JedWatson/react-select/#usage). Here's a simple example:
+You pass _react-virtualized-checkbox_ an array of options. Here's a simple example:
 
 ```js
 import React, { Component } from 'react'
-import VirtualizedSelect from 'react-virtualized-select'
-import 'react-virtualized-select/styles.css'
+import VirtualizedCheckbox from 'react-virtualized-checkbox'
 
-class MySelect extends Component {
+class MyCheckbox extends Component {
   constructor (props) {
     super(props)
 
@@ -63,37 +54,29 @@ class MySelect extends Component {
     ]
 
     return (
-      <VirtualizedSelect
+      <VirtualizedCheckbox
         options={options}
-        onChange={(selectValue) => this.setState({ selectValue })}
-        value={this.state.selectValue}
+        onOK={(checkedOptions) => this.setState({ checkedOptions })}
+        onCancel={ () => this.setState({ checkedOptions: [] })}
       />
     )
   }
 }
 ```
 
-## React Virtualized Select Props
-
-The additional parameters introduced by _react-select-virtualized_ are optional. They are:
+## React Virtualized Checkbox Props
 
 | Property | Type | Description |
 |:---|:---|:---|
-| maxHeight | `PropTypes.number` | Max height of options menu; defaults to 200 pixels. |
-| optionHeight | `PropTypes.number` | Option height; defaults to 35 pixels. |
-| optionRenderer | `PropTypes.func` | Custom option renderer; (see below for signature). |
+| options | `PropTypes.array` | Options to choose from. Can be an array of strings or an array of objects. |
+| onOk | `PropTypes.func` | Callback called when the _Ok_ button is clicked. Takes the selected option labels as arguments. |
+| onCancel | `PropTypes.func` | Callback called when the _Cancel_ is clicked. |
 
-## Custom Option Renderer
-
-You can override the built-in option renderer by specifying your own `optionRenderer` property. Your renderer should return a React element that represents the specified option. It will be passed the following named parameters:
+The additional parameters introduced by _react-virtualized-checkbox_ are optional. They are:
 
 | Property | Type | Description |
 |:---|:---|:---|
-| focusedOption | `PropTypes.object` | The option currently-focused in the dropdown. Use this property to determine if your rendered option should be highlighted or styled differently. |
-| focusedOptionIndex | `PropTypes.number` | Index of the currently-focused option. |
-| focusOption | `PropTypes.func` | Callback to update the focused option; for example, you may want to call this function on mouse-over. |
-| labelKey | `PropTypes.string` | Attribute of option that contains the display text. |
-| option | `PropTypes.object` | The option to be rendered. |
-| options | `PropTypes.arrayOf(PropTypes.object)` | Array of options (objects) contained in the select menu. |
-| selectValue | `PropTypes.func` | Callback to update the selected values; for example, you may want to call this function on click. |
-| valueArray | `PropTypes.arrayOf(PropTypes.object)` | Array of the currently-selected options. Use this property to determine if your rendered option should be highlighted or styled differently. |
+| maxHeight | `PropTypes.number` | Max height of options menu; defaults to 300 pixels. |
+| optionHeight | `PropTypes.number` | Option height; defaults to 30 pixels. |
+| labelKey | `PropTypes.string` | Label key; defaults to 'label'. |
+| valueKey | `PropTypes.string` | Value key; defaults to 'value'. |

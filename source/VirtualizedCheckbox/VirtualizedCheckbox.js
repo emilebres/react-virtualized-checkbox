@@ -23,6 +23,7 @@ class CheckboxGroup extends Component {
     onCancel: PropTypes.func.isRequired,
     maxHeight: PropTypes.number.isRequired,
     rowHeight: PropTypes.number.isRequired
+    // optionRenderer: PropTypes.func
   }
 
   static defaultProps = {
@@ -41,7 +42,9 @@ class CheckboxGroup extends Component {
     var allBox = {}
     allBox[valueKey] = '#ALL#'
     allBox[labelKey] = '(Select all)'
-    const boxes = [allBox, ...this.getDistinctFast(options, labelKey)]
+    const objectOptions = typeof (options[0] === 'string')
+      ? options.map(option => ({label: option, value: option})) : options
+    const boxes = [allBox, ...this.getDistinctFast(objectOptions, labelKey)]
     const checkedCounter = boxes.filter(box => box.checked).length
     this.state = {
       boxes: boxes,
@@ -119,7 +122,7 @@ class CheckboxGroup extends Component {
               width={width}
               rowCount={boxes.length}
               rowHeight={rowHeight}
-              rowRenderer={this.checkboxRenderer}
+              rowRenderer={this._checkboxRenderer}
               boxes={boxes}
             />
         }
@@ -130,7 +133,7 @@ class CheckboxGroup extends Component {
     )
   }
 
-  checkboxRenderer ({index, isScrolling}) {
+  _checkboxRenderer ({index, isScrolling}) {
     const {labelKey, boxes} = this.state
     const box = boxes[index]
     return <Checkbox key={box[labelKey]} onChange={() => this.onChange(box)} label={box[labelKey]} {...box} />
