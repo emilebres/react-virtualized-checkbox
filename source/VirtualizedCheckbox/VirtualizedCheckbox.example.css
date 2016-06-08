@@ -7,15 +7,3 @@
   font-size: .85rem;
   color: #999;
 }
-
-.optionsList {
-  display: flex;
-  list-style: none;
-  margin: 1rem 0;
-  padding: 0;
-}
-
-.optionListItem {
-  display: flex;
-  flex: 1 1 auto;
-}
