@@ -45,8 +45,8 @@ export default class VirtualizedCheckboxExample extends Component {
           <CheckboxGroup
             options={this.props.cityData.map(opt => ({...opt, checked: true}))}
             labelKey={'name'}
-            onOk={(args) => this.setState({results: args, canceled: false})}
-            onCancel={() => this.setState({results: [], canceled: true})}
+            onOk={(all, checked) => this.setState({all, results: checked, canceled: false})}
+            onCancel={() => this.setState({all: false, results: [], canceled: true})}
           />
         </div>
         <h4 className={styles.header}>
@@ -57,37 +57,37 @@ export default class VirtualizedCheckboxExample extends Component {
             <CheckboxGroup
               options={this.props.cityData.map(opt => ({...opt, checked: true}))}
               labelKey={'name'}
-              onOk={(args) => this.setState({results: args, canceled: false})}
-              onCancel={() => this.setState({results: [], canceled: true})}
+              onOk={(all, checked) => this.setState({all, results: checked, canceled: false})}
+              onCancel={() => this.setState({all: false, results: [], canceled: true})}
             />
           </div>
         </ResizableBox>
 
-        <Results canceled={this.state.canceled} results={this.state.results} />
+        <Results canceled={this.state.canceled} results={this.state.results} all={this.state.all} />
       </div>
     )
   }
 }
 
-const Results = ({canceled, results}) => {
+const Results = ({canceled, results, all}) => {
   let message
   if (canceled) {
     message = <div>Selection canceled</div>
+  } else if (all) {
+    message = <div>All options selected.</div>
+  } else if (!results) {
+    message = <div></div>
   } else {
-    if (!results) {
-      message = <div></div>
-    } else {
-      message = (
+    message = (
+      <div>
         <div>
-          <div>
-            {results.length} option{results.length > 1 ? 's' : ''} selected.
-          </div>
-          <div>
-            {results.join(' ')}
-          </div>
+          {results.length} option{results.length > 1 ? 's' : ''} selected.
         </div>
-    ) }
-  }
+        <div>
+          {results.join(' ')}
+        </div>
+      </div>
+  ) }
   return (
     <div>
       <h4 className={styles.header}>

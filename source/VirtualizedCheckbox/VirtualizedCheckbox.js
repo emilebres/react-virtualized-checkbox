@@ -44,15 +44,17 @@ class CheckboxGroup extends Component {
       ? options.map(option => ({label: option, value: option})) : options
     const boxes = [allBox, ...this.getDistinctFast(objectOptions, labelKey)]
     const checkedCounter = boxes.filter(box => box.checked).length
+    const checkedAll = checkedCounter === boxes.length - 1
     if (checkedCounter === boxes.length - 1) { boxes[0].checked = true }
     this.state = {
       boxes: boxes,
       checkedCounter,
       valueKey,
-      labelKey
+      labelKey,
+      checkedAll
     }
     this._checkboxRenderer = this._checkboxRenderer.bind(this)
-    this.checkedBoxes = this.checkedBoxes.bind(this)
+    // this.checkedBoxes = this.checkedBoxes.bind(this)
   }
 
   getDistinctFast (options, labelKey) {
@@ -74,31 +76,37 @@ class CheckboxGroup extends Component {
         const newBoxes = boxes.map(box => ({...box, checked: false}))
         this.setState({
           boxes: newBoxes,
-          checkedCounter: 0
+          checkedCounter: 0,
+          checkedAll: false
         })
       } else {
         const newBoxes = boxes.map(box => ({...box, checked: true}))
         this.setState({
           boxes: newBoxes,
-          checkedCounter: boxes.length - 1
+          checkedCounter: boxes.length - 1,
+          checkedAll: false
         })
       }
     } else {
       const newBoxes = boxes.map(bx => bx[labelKey] === box[labelKey] ? {...box, checked: !box.checked} : bx)
       const newCheckedCounter = box.checked ? checkedCounter - 1 : checkedCounter + 1
+      var checkedAll
       if (boxes[0].checked) {
         newBoxes[0].checked = false
+        checkedAll = false
       } else if (newCheckedCounter === boxes.length - 1) {
         newBoxes[0].checked = true
+        checkedAll = true
       }
       this.setState({
         boxes: newBoxes,
-        checkedCounter: newCheckedCounter
+        checkedCounter: newCheckedCounter,
+        checkedAll
       })
     }
   }
 
-  checkedBoxes () {
+  get checkedBoxes () {
     const {labelKey, boxes} = this.state
     if (boxes[0].checked) {
       return boxes.slice(1).map(box => box[labelKey])
@@ -107,6 +115,10 @@ class CheckboxGroup extends Component {
         .filter(box => box.checked)
         .map(box => box[labelKey])
     }
+  }
+
+  get checkedAll () {
+    return this.state.checkedAll
   }
 
   render () {
@@ -125,7 +137,7 @@ class CheckboxGroup extends Component {
                 boxes={boxes}
               />
               <div style={{display: 'flex', width, height: rowHeight}}>
-                <input type='button' value='Ok' onClick={() => this.props.onOk(this.checkedBoxes())} />
+                <input type='button' value='Ok' onClick={() => this.props.onOk(this.checkedAll, this.checkedBoxes)} />
                 <input type='button' value='Cancel' onClick={() => this.props.onCancel()} />
               </div>
             </div>
