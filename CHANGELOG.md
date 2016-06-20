@@ -1,5 +1,8 @@
 Changelog
 ------------
+###1.0.4
+Added an all boolean on the onOk callback
+
 ###1.0.3
 Made component usable inside a resizable box
 
