@@ -1,5 +1,8 @@
 Changelog
 ------------
+###1.0.5
+Added a value attribute to the checkboxes
+
 ###1.0.4
 Added an all boolean on the onOk callback
 
