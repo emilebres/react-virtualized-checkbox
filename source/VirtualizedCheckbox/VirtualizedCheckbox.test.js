@@ -45,13 +45,13 @@ describe('VirtualizedCheckbox', () => {
     />
   )
 
-  describe('number of rendered children', () => {
-    it('should render enough children to fill the view', () => {
+  describe('rendered children', () => {
+    it('should fill the view', () => {
       const wrapper = mount(fixture(), {attachTo: node})
       expect(wrapper.find('[type="checkbox"]').length).toEqual(10)
     })
 
-    it('should not render more children than available if the list is not filled', () => {
+    it('should work if they do not fill the view', () => {
       const wrapper = mount(fixture({ options: names.slice(0, 5) }), {attachTo: node})
       expect(wrapper.find('[type="checkbox"]').length).toEqual(1 + 5)
     })
@@ -59,6 +59,14 @@ describe('VirtualizedCheckbox', () => {
     it('should conform to rowHeight prop', () => {
       const wrapper = mount(fixture({rowHeight: 60}), {attachTo: node})
       expect(wrapper.find('[type="checkbox"]').length).toEqual(5)
+    })
+
+    it('should change after a scroll event', () => {
+      const wrapper = mount(fixture(), {attachTo: node})
+      wrapper.setProps({scrollTop: 200})
+      wrapper.simulate('scroll')
+      expect(wrapper.find({value: 'Name 3'}).length).toBe(0)
+      expect(wrapper.find({value: 'Name 13'}).length).toBe(1)
     })
   })
 

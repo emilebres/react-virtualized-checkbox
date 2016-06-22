@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {VirtualScroll, AutoSizer} from 'react-virtualized'
 import 'react-virtualized/styles.css'
 
-const Checkbox = ({onChange, checked, label, index}) => (
+const Checkbox = ({onChange, checked, label}) => (
   <label>
     <input
       type='checkbox'
@@ -149,7 +149,7 @@ class VirtualizedCheckbox extends Component {
   _checkboxRenderer ({index, isScrolling}) {
     const {labelKey, boxes} = this.state
     const box = boxes[index]
-    return <Checkbox key={box[labelKey]} onChange={() => this.onChange(box)} label={box[labelKey]} index={index} {...box} />
+    return <Checkbox key={box[labelKey]} onChange={() => this.onChange(box)} label={box[labelKey]} {...box} />
   }
 }
 
