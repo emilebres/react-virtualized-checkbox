@@ -1,0 +1,10 @@
+general:
+  branches:
+    ignore:
+      - gh-pages
+machine:
+  node:
+    version: v6.2.1
+  npm:
+    version:
+      v3.8.3
