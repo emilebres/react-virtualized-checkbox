@@ -42,6 +42,10 @@ module.exports = {
         test: /\.css$/,
         loaders: ['style', 'css?importLoaders=1'],
         include: path.join(__dirname, 'node_modules')
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
   },
@@ -51,5 +55,10 @@ module.exports = {
   devServer: {
     contentBase: 'build',
     port: 3001
+  },
+  externals: {
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
   }
 }

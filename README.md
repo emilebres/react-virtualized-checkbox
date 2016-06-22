@@ -70,7 +70,6 @@ The additional parameters introduced by _react-virtualized-checkbox_ are optiona
 
 | Property | Type | Description |
 |:---|:---|:---|
-| maxHeight | `PropTypes.number` | Max height of options menu; defaults to 300 pixels. |
 | optionHeight | `PropTypes.number` | Option height; defaults to 30 pixels. |
 | labelKey | `PropTypes.string` | Label key; defaults to 'label'. |
 | valueKey | `PropTypes.string` | Value key; defaults to 'value'. |

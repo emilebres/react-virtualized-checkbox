@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import CheckboxGroup from './VirtualizedCheckbox'
+import VirtualizedCheckbox from './VirtualizedCheckbox'
 import styles from './VirtualizedCheckbox.example.css'
 import {ResizableBox} from 'react-resizable'
 import 'react-resizable/css/styles.css'
@@ -42,11 +42,12 @@ export default class VirtualizedCheckboxExample extends Component {
          Displays a list of the 1,000 largest cities in the world.
         </div>
         <div style={{height: 300}}>
-          <CheckboxGroup
+          <VirtualizedCheckbox
             options={this.props.cityData.map(opt => ({...opt, checked: true}))}
             labelKey={'name'}
             onOk={(all, checked) => this.setState({all, results: checked, canceled: false})}
             onCancel={() => this.setState({all: false, results: [], canceled: true})}
+            rowHeight={20}
           />
         </div>
         <h4 className={styles.header}>
@@ -54,7 +55,7 @@ export default class VirtualizedCheckboxExample extends Component {
         </h4>
         <ResizableBox width={700} height={300} minConstraints={[700, 300]}>
           <div style={divStyle}>
-            <CheckboxGroup
+            <VirtualizedCheckbox
               options={this.props.cityData.map(opt => ({...opt, checked: true}))}
               labelKey={'name'}
               onOk={(all, checked) => this.setState({all, results: checked, canceled: false})}
