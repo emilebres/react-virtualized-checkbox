@@ -1,5 +1,8 @@
 Changelog
 ------------
+###1.0.6
+Added a textbox to filter the checkboxes
+
 ###1.0.5
 Added a value attribute to the checkboxes
 
