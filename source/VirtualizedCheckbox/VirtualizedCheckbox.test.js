@@ -55,7 +55,7 @@ describe('VirtualizedCheckbox', () => {
     })
 
     it('should work if they do not fill the view', () => {
-      const wrapper = mount(fixture({ options: names.slice(0, 5) }), {attachTo: node})
+      const wrapper = mount(fixture({ items: names.slice(0, 5) }), {attachTo: node})
       expect(wrapper.find('[type="checkbox"]').length).toEqual(1 + 5)
     })
 
@@ -74,7 +74,7 @@ describe('VirtualizedCheckbox', () => {
   })
 
   describe('checkedAll flag', () => {
-    describe(' with all options checked on initialization', () => {
+    describe(' with all items checked on initialization', () => {
       it('should be true on initialization', () => {
         const wrapper = shallow(fixture())
         expect(wrapper.instance().checkedAll).toBe(true)
@@ -87,14 +87,14 @@ describe('VirtualizedCheckbox', () => {
       })
     })
 
-    describe(' with not all options checked on initialization', () => {
+    describe(' with not all items checked on initialization', () => {
       it('should false on initialization', () => {
-        const wrapper = shallow(fixture({ options: names.map((name, i) => ({ ...name, checked: i === 33 })) }))
+        const wrapper = shallow(fixture({ items: names.map((name, i) => ({ ...name, checked: i === 33 })) }))
         expect(wrapper.instance().checkedAll).toBe(false)
       })
 
       it('should be true when last unchecked box is checked', () => {
-        const wrapper = mount(fixture({ options: names.map((name, i) => ({ ...name, checked: i !== 3 })) }), {attachTo: node})
+        const wrapper = mount(fixture({ items: names.map((name, i) => ({ ...name, checked: i !== 3 })) }), {attachTo: node})
         wrapper.find({value: 'Name 3'}).simulate('change')
         expect(wrapper.instance().checkedAll).toBe(true)
       })
@@ -110,7 +110,7 @@ describe('VirtualizedCheckbox', () => {
     })
 
     it('called with false and checked boxes if not all boxes are checked', () => {
-      const wrapper = mount(fixture({ options: names.map((name, i) => ({ ...name, checked: [33, 44].indexOf(i) > -1 })) }), {attachTo: node})
+      const wrapper = mount(fixture({ items: names.map((name, i) => ({ ...name, checked: [33, 44].indexOf(i) > -1 })) }), {attachTo: node})
       wrapper.find('[value="Ok"]').simulate('click')
       expect(allFlag).toBe(false)
       expect(checkedBoxes.length).toEqual(2)
