@@ -26,7 +26,7 @@ Alternately you can load a global-friendly UMD build:
 
 ## Simple Example
 
-You pass _react-virtualized-checkbox_ an array of options. Here's a simple example:
+You pass _react-virtualized-checkbox_ an array of items. Here's a simple example:
 
 ```js
 import React, { Component } from 'react'
@@ -40,7 +40,7 @@ class MyCheckbox extends Component {
   }
 
   render () {
-    const options = [
+    const items = [
       { label: "One", value: 1 },
       { label: "Two", value: 2 },
       { label: "Three", value: 3 }
@@ -49,7 +49,7 @@ class MyCheckbox extends Component {
 
     return (
       <VirtualizedCheckbox
-        options={options}
+        items={items}
         onOK={(checkedOptions) => this.setState({ checkedOptions })}
         onCancel={ () => this.setState({ checkedOptions: [] })}
       />
@@ -62,7 +62,7 @@ class MyCheckbox extends Component {
 
 | Property | Type | Description |
 |:---|:---|:---|
-| options | `PropTypes.array` | Options to choose from; can be an array of strings or an array of objects. |
+| items | `PropTypes.array` | Items to choose from; can be an array of strings or an array of objects. |
 | onOk | `PropTypes.func` | Callback called when the _Ok_ button is clicked; takes the selected option labels as arguments. |
 | onCancel | `PropTypes.func` | Callback called when the _Cancel_ is clicked. |
 

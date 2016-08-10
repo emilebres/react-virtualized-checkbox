@@ -20,7 +20,7 @@ class VirtualizedCheckbox extends Component {
     labelKey: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
-    options: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
     rowHeight: PropTypes.number.isRequired,
     textFilter: PropTypes.string,
     valueKey: PropTypes.string.isRequired
@@ -30,7 +30,7 @@ class VirtualizedCheckbox extends Component {
     labelKey: 'label',
     onCancel: () => null,
     onOk: () => null,
-    options: [],
+    items: [],
     rowHeight: 30,
     textFilter: '',
     valueKey: 'value'
@@ -38,15 +38,15 @@ class VirtualizedCheckbox extends Component {
 
   constructor (props) {
     super(props)
-    const {options, labelKey, valueKey, textFilter} = props
+    const {items, labelKey, valueKey, textFilter} = props
 
     let allBox = {}
     allBox[valueKey] = '#ALL#'
     allBox[labelKey] = '(Select all)'
 
-    const objectOptions = typeof (options[0]) === 'string'
-      ? options.map(option => ({[labelKey]: option, [valueKey]: option}))
-      : options
+    const objectOptions = typeof (items[0]) === 'string'
+      ? items.map(item => ({[labelKey]: item, [valueKey]: item}))
+      : items
     const _boxes = [allBox, ...this.getDistinctFast(objectOptions, labelKey)]
     const boxes = this.applyTextFilter(textFilter, _boxes, labelKey)
 
@@ -61,10 +61,10 @@ class VirtualizedCheckbox extends Component {
     this.onTextFilterChange = this.onTextFilterChange.bind(this)
   }
 
-  getDistinctFast (options, labelKey) {
+  getDistinctFast (items, labelKey) {
     let unique = {}
     let distinct = []
-    for (let opt of options) {
+    for (let opt of items) {
       if (typeof (unique[opt[labelKey]]) === 'undefined') {
         distinct.push(opt)
       }

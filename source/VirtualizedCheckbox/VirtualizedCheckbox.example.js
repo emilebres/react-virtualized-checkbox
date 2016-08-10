@@ -43,7 +43,7 @@ export default class VirtualizedCheckboxExample extends Component {
         </div>
         <div style={{height: 300}}>
           <VirtualizedCheckbox
-            options={this.props.cityData.map(opt => ({...opt, checked: true}))}
+            items={this.props.cityData.map(opt => ({...opt, checked: true}))}
             labelKey={'name'}
             onOk={(all, checked) => this.setState({all, results: checked, canceled: false})}
             onCancel={() => this.setState({all: false, results: [], canceled: true})}
@@ -56,7 +56,7 @@ export default class VirtualizedCheckboxExample extends Component {
         <ResizableBox width={700} height={300} minConstraints={[700, 300]}>
           <div style={divStyle}>
             <VirtualizedCheckbox
-              options={this.props.cityData.map(opt => ({...opt, checked: true}))}
+              items={this.props.cityData.map(opt => ({...opt, checked: true}))}
               labelKey={'name'}
               onOk={(all, checked) => this.setState({all, results: checked, canceled: false})}
               onCancel={() => this.setState({all: false, results: [], canceled: true})}

@@ -11,7 +11,7 @@ describe('VirtualizedCheckbox', () => {
 
   const fixture = (props) => (
     <VirtualizedCheckbox
-      options={names}
+      items={names}
       labelKey={'name'}
       onOk={(all, checked) => {
         allFlag = all
