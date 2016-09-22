@@ -50,8 +50,8 @@ class MyCheckbox extends Component {
     return (
       <VirtualizedCheckbox
         items={items}
-        onOK={(checkedOptions) => this.setState({ checkedOptions })}
-        onCancel={ () => this.setState({ checkedOptions: [] })}
+        onOK={(checkedItems) => this.setState({ checkedItems })}
+        onCancel={ () => this.setState({ checkedItems: [] })}
       />
     )
   }
@@ -63,13 +63,11 @@ class MyCheckbox extends Component {
 | Property | Type | Description |
 |:---|:---|:---|
 | items | `PropTypes.array` | Items to choose from; can be an array of strings or an array of objects. |
-| onOk | `PropTypes.func` | Callback called when the _Ok_ button is clicked; takes the selected option labels as arguments. |
-| onCancel | `PropTypes.func` | Callback called when the _Cancel_ is clicked. |
-
-The additional parameters introduced by _react-virtualized-checkbox_ are optional. They are:
-
-| Property | Type | Description |
-|:---|:---|:---|
-| optionHeight | `PropTypes.number` | Option height; defaults to 30 pixels. |
 | labelKey | `PropTypes.string` | Label key; defaults to 'label'. |
 | valueKey | `PropTypes.string` | Value key; defaults to 'value'. |
+| onOk | `PropTypes.func` | Callback called when the _Ok_ button is clicked; takes the selected items as arguments. |
+| onCancel | `PropTypes.func` | Callback called when the _Cancel_ button is clicked. |
+| onChange | `PropTypes.func` | Callback called when a checkbox is clicked. |
+| rowHeight | `PropTypes.number` | Row height; defaults to 30 pixels. |
+| hasButtons | `PropTypes.bool` | If the _Ok_ and _Cancel_ buttons are displayed; defaults to true |
+| hasFilterBox | `PropTypes.bool` | If the text filter box is displayed; defaults to true |

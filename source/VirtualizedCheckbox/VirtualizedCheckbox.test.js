@@ -64,6 +64,21 @@ describe('VirtualizedCheckbox', () => {
       expect(wrapper.find('[type="checkbox"]').length).toEqual(4)
     })
 
+    it('should work without a filter box', () => {
+      const wrapper = mount(fixture({rowHeight: 30, hasFilterBox: false}), {attachTo: node})
+      expect(wrapper.find('[type="checkbox"]').length).toEqual(11)
+    })
+
+    it('should work without buttons', () => {
+      const wrapper = mount(fixture({rowHeight: 30, hasButtons: false}), {attachTo: node})
+      expect(wrapper.find('[type="checkbox"]').length).toEqual(11)
+    })
+
+    it('should work without buttons and filter box', () => {
+      const wrapper = mount(fixture({rowHeight: 30, hasButtons: false, hasFilterBox: false}), {attachTo: node})
+      expect(wrapper.find('[type="checkbox"]').length).toEqual(12)
+    })
+
     it('should change after a scroll event', () => {
       const wrapper = mount(fixture(), {attachTo: node})
       wrapper.setProps({scrollTop: 200})

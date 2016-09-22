@@ -2,11 +2,11 @@
   z-index: 1;
 }
 
-.VirtualizedSelectOption {
+.VirtualizedSelectItem {
   display: flex;
   align-items: center;
   padding: 0 .5rem;
 }
-.VirtualizedSelectFocusedOption {
+.VirtualizedSelectFocusedItem {
   background-color: rgba(0, 126, 255, 0.1);
 }*/

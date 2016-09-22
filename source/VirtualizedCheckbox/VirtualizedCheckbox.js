@@ -17,8 +17,11 @@ const Checkbox = ({onChange, checked, label, style}) => (
 class VirtualizedCheckbox extends Component {
 
   static propTypes = {
+    hasButtons: PropTypes.bool,
+    hasFilterBox: PropTypes.bool,
     labelKey: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
     rowHeight: PropTypes.number.isRequired,
@@ -27,8 +30,11 @@ class VirtualizedCheckbox extends Component {
   }
 
   static defaultProps = {
+    hasButtons: true,
+    hasFilterBox: true,
     labelKey: 'label',
     onCancel: () => null,
+    onChange: () => null,
     onOk: () => null,
     items: [],
     rowHeight: 30,
@@ -44,10 +50,10 @@ class VirtualizedCheckbox extends Component {
     allBox[valueKey] = '#ALL#'
     allBox[labelKey] = '(Select all)'
 
-    const objectOptions = typeof (items[0]) === 'string'
+    const objectItems = typeof (items[0]) === 'string'
       ? items.map(item => ({[labelKey]: item, [valueKey]: item}))
       : items
-    const _boxes = [allBox, ...this.getDistinctFast(objectOptions, labelKey)]
+    const _boxes = [allBox, ...this.getDistinctFast(objectItems, labelKey)]
     const boxes = this.applyTextFilter(textFilter, _boxes, labelKey)
 
     this.state = {
@@ -74,7 +80,7 @@ class VirtualizedCheckbox extends Component {
   }
 
   onChange (box) {
-    const {valueKey, labelKey} = this.props
+    const {valueKey, labelKey, onChange} = this.props
     const {boxes} = this.state
     if (box[valueKey] === '#ALL#') {
       if (this.checkedAll) {
@@ -100,6 +106,9 @@ class VirtualizedCheckbox extends Component {
         boxes: newBoxes
       })
     }
+    if (onChange) {
+      onChange(box)
+    }
   }
 
   onTextFilterChange (event) {
@@ -124,15 +133,13 @@ class VirtualizedCheckbox extends Component {
   }
 
   get checkedBoxes () {
-    const {labelKey} = this.props
     const {boxes} = this.state
     if (this.checkedAll) {
-      return boxes.slice(1).map(box => box[labelKey])
+      return boxes.slice(1)
     } else {
       return boxes.slice(1)
         .filter(box => box.filtered)
         .filter(box => box.checked)
-        .map(box => box[labelKey])
     }
   }
 
@@ -151,24 +158,32 @@ class VirtualizedCheckbox extends Component {
 
   render () {
     // console.log(this)
-    const {rowHeight} = this.props
+    const {rowHeight, hasButtons, hasFilterBox} = this.props
     const {boxes, textFilter} = this.state
     const filteredBoxes = boxes.filter(box => box.filtered)
+    const virtualScrollHeight = (height) => {
+      let i = 0
+      if (hasButtons) i++
+      if (hasFilterBox) i++
+      return height - (i * rowHeight)
+    }
     return (
       <AutoSizer>
           {({width, height}) =>
             <div>
-              <div style={{height: rowHeight}}>
-                <input
-                  type='text'
-                  id='filter'
-                  placeholder='Filter boxes'
-                  value={textFilter}
-                  onChange={this.onTextFilterChange}
-                />
-              </div>
+              {hasFilterBox
+                ? <div style={{height: rowHeight}}>
+                  <input
+                    type='text'
+                    id='filter'
+                    placeholder='Filter boxes'
+                    value={textFilter}
+                    onChange={this.onTextFilterChange}
+                  />
+                </div>
+              : null}
               <VirtualScroll
-                height={height - 2 * rowHeight}
+                height={virtualScrollHeight(height)}
                 width={width}
                 rowCount={filteredBoxes.length}
                 rowHeight={rowHeight}
@@ -176,10 +191,12 @@ class VirtualizedCheckbox extends Component {
                 boxes={filteredBoxes}
                 {...this.props}
               />
-              <div style={{display: 'flex', width, height: rowHeight}}>
-                <input type='button' value='Ok' onClick={() => this.props.onOk(this.checkedAll, this.checkedBoxes)} />
-                <input type='button' value='Cancel' onClick={() => this.props.onCancel()} />
-              </div>
+              {hasButtons
+                ? <div style={{display: 'flex', width, height: rowHeight}}>
+                  <input type='button' value='Ok' onClick={() => this.props.onOk(this.checkedAll, this.checkedBoxes, textFilter)} />
+                  <input type='button' value='Cancel' onClick={() => this.props.onCancel()} />
+                </div>
+              : null}
             </div>
           }
       </AutoSizer>
