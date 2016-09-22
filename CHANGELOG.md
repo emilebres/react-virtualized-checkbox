@@ -1,5 +1,15 @@
 Changelog
 ------------
+###2.0.0
+##Breaking changes
+`options` prop is now called `items`.
+onOk callback now takes the checked objects as arguments (labelKey and valueKey).
+onOk callback now takes a third argument: the text filter value.
+##Changes
+An onChange callback can be passed as prop. It is called when a checkbox is clicked.
+hasFilterBox and hasButtons are new props which determine respectively if
+VirtualizedCheckbox displays a filter box and buttons
+
 ###1.0.6
 Added a textbox to filter the checkboxes
 
