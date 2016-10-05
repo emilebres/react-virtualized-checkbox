@@ -1,5 +1,8 @@
 Changelog
 ------------
+###2.0.1
+Update to react-virtualized v8
+
 ###2.0.0
 ##Breaking changes
 `options` prop is now called `items`.
