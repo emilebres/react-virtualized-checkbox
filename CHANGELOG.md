@@ -1,5 +1,8 @@
 Changelog
 ------------
+###2.0.3
+Fix bug on checkboxes alignment
+
 ###2.0.2
 Fix checkboxes alignment
 
