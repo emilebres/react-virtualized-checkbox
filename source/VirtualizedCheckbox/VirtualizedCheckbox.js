@@ -1,17 +1,18 @@
 import React, {Component, PropTypes} from 'react'
-import {VirtualScroll, AutoSizer} from 'react-virtualized'
-import 'react-virtualized/styles.css'
+import {List, AutoSizer} from 'react-virtualized'
 
 const Checkbox = ({onChange, checked, label, style}) => (
-  <label style={style}>
-    <input
-      type='checkbox'
-      value={label}
-      onChange={() => onChange()}
-      checked={checked || false}
-    />
-  {label}
-  </label>
+  <div>
+    <label style={style}>
+      <input
+        type='checkbox'
+        value={label}
+        onChange={() => onChange()}
+        checked={checked || false}
+      />
+    {label}
+    </label>
+  </div>
   )
 
 class VirtualizedCheckbox extends Component {
@@ -182,7 +183,7 @@ class VirtualizedCheckbox extends Component {
                   />
                 </div>
               : null}
-              <VirtualScroll
+              <List
                 height={virtualScrollHeight(height)}
                 width={width}
                 rowCount={filteredBoxes.length}
@@ -203,12 +204,12 @@ class VirtualizedCheckbox extends Component {
     )
   }
 
-  _checkboxRenderer ({index, isScrolling}) {
+  _checkboxRenderer ({index, style}) {
     const {valueKey, labelKey} = this.props
     const {boxes} = this.state
     let box = boxes.filter(box => box.filtered)[index]
     if (box[valueKey] === '#ALL#') { box = {...box, style: {color: 'black'}} }
-    return <Checkbox key={box[labelKey]} onChange={() => this.onChange(box)} label={box[labelKey]} {...box} />
+    return <Checkbox style={style} key={box[labelKey]} onChange={() => this.onChange(box)} label={box[labelKey]} {...box} />
   }
 }
 

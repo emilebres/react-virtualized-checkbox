@@ -102,11 +102,11 @@
     "karma-coverage": "^0.5.5",
     "karma-jasmine": "^0.3.6",
     "karma-junit-reporter": "^0.3.8",
-    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-phantomjs-launcher": "^1.0.2",
     "karma-sourcemap-loader": "^0.3.6",
     "karma-spec-reporter": "0.0.23",
     "karma-webpack": "^1.7.0",
-    "phantomjs": "^1.9.19",
+    "phantomjs-prebuilt": "^2.1.13",
     "postcss": "^5.0.14",
     "postcss-cli": "^2.3.3",
     "postcss-loader": "^0.8.0",
@@ -126,7 +126,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
-    "react-virtualized": "^7.0.0"
+    "react-virtualized": "^8.0.11"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.1.0",
