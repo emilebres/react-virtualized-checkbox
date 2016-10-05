@@ -1,5 +1,8 @@
 Changelog
 ------------
+###2.0.2
+Fix checkboxes alignment
+
 ###2.0.1
 Update to react-virtualized v8
 
