@@ -2,8 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import {List, AutoSizer} from 'react-virtualized'
 
 const Checkbox = ({onChange, checked, label, style}) => (
-  <div>
-    <label style={style}>
+  <div style={style}>
+    <label style={{textAlign: 'left'}}>
       <input
         type='checkbox'
         value={label}
