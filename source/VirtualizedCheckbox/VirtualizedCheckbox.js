@@ -7,13 +7,13 @@ const Checkbox = ({onChange, checked, label, style}) => (
       <input
         type='checkbox'
         value={label}
-        onChange={() => onChange()}
+        onChange={onChange}
         checked={checked || false}
       />
     {label}
     </label>
   </div>
-  )
+)
 
 class VirtualizedCheckbox extends Component {
 
@@ -66,6 +66,11 @@ class VirtualizedCheckbox extends Component {
 
     this._checkboxRenderer = this._checkboxRenderer.bind(this)
     this.onTextFilterChange = this.onTextFilterChange.bind(this)
+    this.onChange = this.onChange.bind(this)
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    console.log(this.state.boxes === nextState.boxes);
   }
 
   getDistinctFast (items, labelKey) {
@@ -96,7 +101,12 @@ class VirtualizedCheckbox extends Component {
         })
       }
     } else {
-      const newBoxes = boxes.map(bx => bx[labelKey] === box[labelKey] ? {...box, checked: !box.checked} : bx)
+      const newBoxes = boxes.map(bx => {
+        if (bx[labelKey] === box[labelKey]) {
+          return {...box, checked: !box.checked}
+        }
+        return bx
+      })
       const newCheckedCounter = box.checked ? this.checkedCounter - 1 : this.checkedCounter + 1
       if (this.checkedAll) {
         newBoxes[0].checked = false
@@ -107,6 +117,7 @@ class VirtualizedCheckbox extends Component {
         boxes: newBoxes
       })
     }
+    // this.list.forceUpdate()
     if (onChange) {
       onChange(box)
     }
@@ -158,7 +169,6 @@ class VirtualizedCheckbox extends Component {
   }
 
   render () {
-    // console.log(this)
     const {rowHeight, hasButtons, hasFilterBox} = this.props
     const {boxes, textFilter} = this.state
     const filteredBoxes = boxes.filter(box => box.filtered)
@@ -209,7 +219,7 @@ class VirtualizedCheckbox extends Component {
     const {boxes} = this.state
     let box = boxes.filter(box => box.filtered)[index]
     if (box[valueKey] === '#ALL#') { box = {...box, style: {color: 'black'}} }
-    return <Checkbox style={style} key={box[labelKey]} onChange={() => this.onChange(box)} label={box[labelKey]} {...box} />
+    return <Checkbox style={style} key={box[labelKey]} onChange={() => this.onChange(box)} label={box[labelKey]} checked={box.checked} />
   }
 }
 
