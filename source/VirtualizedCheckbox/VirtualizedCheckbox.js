@@ -69,10 +69,6 @@ class VirtualizedCheckbox extends Component {
     this.onChange = this.onChange.bind(this)
   }
 
-  componentWillUpdate (nextProps, nextState) {
-    console.log(this.state.boxes === nextState.boxes);
-  }
-
   getDistinctFast (items, labelKey) {
     let unique = {}
     let distinct = []

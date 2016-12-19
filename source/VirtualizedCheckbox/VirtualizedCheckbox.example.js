@@ -109,7 +109,7 @@ export default class VirtualizedCheckboxExample extends Component {
         </div>
         <div>
           <h3>In an overlay</h3>
-          <button ref={ref => this.overlayButton = ref} onClick={this.openOverlay}>Open overlay</button>
+          <button ref={ref => {this.overlayButton = ref}} onClick={this.openOverlay}>Open overlay</button>
           <Modal
             autoFocus={false}
             show={this.state.showOverlay}
@@ -117,7 +117,7 @@ export default class VirtualizedCheckboxExample extends Component {
             onHide={this.closeOverlay}
             target={this.overlayButton}
             container={document.body}
-            backdropStyle={{ position: 'fixed', top:0, bottom:0, left: 0, right: 0 }}
+            backdropStyle={{ position: 'fixed', top: 0, bottom: 0, left: 0, right: 0 }}
           >
             <Position
               placement='bottom'
