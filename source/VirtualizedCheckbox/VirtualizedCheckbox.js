@@ -20,14 +20,14 @@ class VirtualizedCheckbox extends Component {
   static propTypes = {
     hasButtons: PropTypes.bool,
     hasFilterBox: PropTypes.bool,
-    labelKey: PropTypes.string.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    onOk: PropTypes.func.isRequired,
-    items: PropTypes.array.isRequired,
-    rowHeight: PropTypes.number.isRequired,
+    labelKey: PropTypes.string,
+    onCancel: PropTypes.func,
+    onChange: PropTypes.func,
+    onOk: PropTypes.func,
+    items: PropTypes.array,
+    rowHeight: PropTypes.number,
     textFilter: PropTypes.string,
-    valueKey: PropTypes.string.isRequired
+    valueKey: PropTypes.string
   }
 
   static defaultProps = {
