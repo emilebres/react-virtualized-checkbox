@@ -1,5 +1,10 @@
 Changelog
 ------------
+###2.0.4
+Remove unnecessary isRequired on props
+Add example on overlay
+Fix linting issues
+
 ###2.0.3
 Fix bug on checkboxes alignment
 
