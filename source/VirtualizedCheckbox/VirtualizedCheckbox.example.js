@@ -6,7 +6,6 @@ import {ResizableBox} from 'react-resizable'
 import 'react-resizable/css/styles.css'
 
 export default class VirtualizedCheckboxExample extends Component {
-
   static propTypes = {
     cityData: PropTypes.array.isRequired
   }
@@ -163,7 +162,8 @@ const Results = ({canceled, results, all, textFilter}) => {
           {results.map(item => item.name).join(' ')}
         </div>
       </div>
-  ) }
+  )
+  }
   return (
     <div style={{margin: '1rem 0'}}>
       <div style={{border: '#2196f3 dotted 0.2rem', borderRadius: '1rem', padding: '0.5rem', backgroundColor: 'rgba(0,0,0,0.1)'}}>

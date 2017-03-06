@@ -5,13 +5,13 @@ const webpack = require('webpack')
 module.exports = {
   devtool: 'source-map',
   entry: {
-    'react-virtualized-select': './source/index.js'
+    'react-virtualized-checkbox': './source/index.js'
   },
   output: {
     path: 'dist/umd',
     filename: '[name].js',
     libraryTarget: 'umd',
-    library: 'react-virtualized-select'
+    library: 'react-virtualized-checkbox'
   },
   externals: {
     react: {
