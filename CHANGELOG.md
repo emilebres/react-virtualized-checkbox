@@ -1,5 +1,8 @@
 Changelog
 ------------
+###2.1.0
+Fix react-virtualized imports
+
 ###2.0.4
 Remove unnecessary isRequired on props
 Add example on overlay
