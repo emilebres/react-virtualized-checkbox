@@ -1,5 +1,8 @@
 Changelog
 ------------
+###2.1.1 / 2.1.2
+Fix react-virtualized imports
+
 ###2.1.0
 Fix react-virtualized imports
 
