@@ -126,6 +126,6 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
-    "react-virtualized": "latest"
+    "react-virtualized": "9.2.1"
   }
 }
