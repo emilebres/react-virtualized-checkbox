@@ -41,16 +41,16 @@ class MyCheckbox extends Component {
 
   render () {
     const items = [
-      { label: "One", value: 1 },
-      { label: "Two", value: 2 },
-      { label: "Three", value: 3 }
+      { label: "One", value: 1, checked: true},
+      { label: "Two", value: 2, checked: true},
+      { label: "Three", value: 3, checked: true}
       // And so on...
     ]
 
     return (
       <VirtualizedCheckbox
         items={items}
-        onOK={(checkedItems) => this.setState({ checkedItems })}
+        onOk={(checkedItems) => this.setState({ checkedItems })}
         onCancel={ () => this.setState({ checkedItems: [] })}
       />
     )
