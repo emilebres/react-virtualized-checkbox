@@ -50,7 +50,7 @@ class MyCheckbox extends Component {
     return (
       <VirtualizedCheckbox
         items={items}
-        onOK={(checkedItems) => this.setState({ checkedItems })}
+        onOk={(checkedItems) => this.setState({ checkedItems })}
         onCancel={ () => this.setState({ checkedItems: [] })}
       />
     )
