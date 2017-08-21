@@ -7,9 +7,10 @@
   "bugs": {
     "url": "https://github.com/emilebres/react-virtualized-checkbox/issues"
   },
-  "homepage": "https://github.com/emilebres/react-virtualized-checkbox",
+  "homepage": "https://emilebres.github.io/react-virtualized-checkbox",
   "main": "lib/index.js",
   "dependencies": {
+    "gh-pages": "^1.0.0",
     "prop-types": "^15.5.10",
     "react-virtualized": "^9.9.0"
   },
@@ -18,6 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "prepare": "rimraf lib && npm run compile",
     "compile": "npm run lint && npm run compile:js",
     "lint": "eslint src/**/*.js",
@@ -41,15 +44,10 @@
     "rimraf": "^2.6.1"
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "presets": ["react-app"]
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "prettier"
-    ],
+    "extends": ["react-app", "prettier"],
     "env": {
       "browser": true,
       "jest": true

@@ -59,7 +59,7 @@ export default class VirtualizedCheckboxExample extends Component {
         <div>
           <h3>Example</h3>
           <div className={styles.description}>
-            Displays a list of the 1,000 largest cities in the world.
+            Displays a list of the 952 largest cities in the US.
           </div>
           <div className={styles.description}>
             Check the console to see the callback on each toggle of a checkbox.
