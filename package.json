@@ -1,6 +1,6 @@
 {
   "name": "react-virtualized-checkbox",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "Checkbox group component with virtualization for large number of items",
   "author": "Emile Bres <emile.bres@gmail.com> (http://github.com/emilebres)",
   "license": "MIT",
@@ -41,10 +41,15 @@
     "rimraf": "^2.6.1"
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "eslintConfig": {
-    "extends": ["react-app", "prettier"],
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
     "env": {
       "browser": true,
       "jest": true
