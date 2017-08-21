@@ -9,19 +9,13 @@ Install `react-virtualized-checkbox` using npm.
 
 ```shell
 npm install react-virtualized-checkbox --save
+
+yarn add react-virtualized-checkbox
 ```
 
-ES6, CommonJS, and UMD builds are available with each distribution.
-For example:
-
+And in your code:
 ```js
 import VirtualizedCheckbox from 'react-virtualized-checkbox'
-```
-
-Alternately you can load a global-friendly UMD build:
-
-```html
-<script src="path-to-react-virtualized-checkbox/dist/umd/react-virtualized-checkbox.js"></script>
 ```
 
 ## Simple Example
@@ -63,11 +57,13 @@ class MyCheckbox extends Component {
 | Property | Type | Description |
 |:---|:---|:---|
 | items | `PropTypes.array` | Items to choose from; can be an array of strings or an array of objects. |
-| labelKey | `PropTypes.string` | Label key; defaults to 'label'. |
-| valueKey | `PropTypes.string` | Value key; defaults to 'value'. |
-| onOk | `PropTypes.func` | Callback called when the _Ok_ button is clicked; takes the selected items as arguments. |
+| onOk | `PropTypes.func` | Callback called when the _Ok_ button is clicked; takes an array of the selected items, a boolean if all items are selected and the text filter as arguments. |
 | onCancel | `PropTypes.func` | Callback called when the _Cancel_ button is clicked. |
-| onChange | `PropTypes.func` | Callback called when a checkbox is clicked. |
-| rowHeight | `PropTypes.number` | Row height; defaults to 30 pixels. |
-| hasButtons | `PropTypes.bool` | If the _Ok_ and _Cancel_ buttons are displayed; defaults to true |
+| onChange | `PropTypes.func` | Callback called when a checkbox is clicked. If a normal checkbox is clicked, will return the item. If the (Select all) checkbox is clicked, will return an array of all filtered items.|
 | hasFilterBox | `PropTypes.bool` | If the text filter box is displayed; defaults to true |
+| hasOkButton | `PropTypes.bool` | If the _Ok_ button is displayed; defaults to true |
+| hasCancelButton | `PropTypes.bool` | If the _Cancel_ button is displayed; defaults to true |
+| labelKey | `PropTypes.string` | Label key; defaults to 'label'. |
+| rowHeight | `PropTypes.number` | Row height; defaults to 30 pixels. |
+| height | `PropTypes.number` | Component height; If not set, will get from the parent. |
+| width | `PropTypes.number` | Component width; If not set, will get from the parent. |

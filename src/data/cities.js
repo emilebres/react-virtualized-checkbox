@@ -186,7 +186,7 @@ export default [
   { name: 'Clovis' },
   { name: 'Coachella' },
   { name: 'Coconut Creek' },
-  { name: 'Coeur d\'Alene' },
+  { name: "Coeur d'Alene" },
   { name: 'College Station' },
   { name: 'Collierville' },
   { name: 'Colorado Springs' },
@@ -489,7 +489,7 @@ export default [
   { name: 'Lawton' },
   { name: 'Layton' },
   { name: 'League City' },
-  { name: 'Lee\'s Summit' },
+  { name: "Lee's Summit" },
   { name: 'Leesburg' },
   { name: 'Lehi' },
   { name: 'Lenexa' },
@@ -640,7 +640,7 @@ export default [
   { name: 'Norwich' },
   { name: 'Novato' },
   { name: 'Novi' },
-  { name: 'O\'Fallon' },
+  { name: "O'Fallon" },
   { name: 'Oak Lawn' },
   { name: 'Oak Park' },
   { name: 'Oakland' },
@@ -999,4 +999,4 @@ export default [
   { name: 'Yuba City' },
   { name: 'Yucaipa' },
   { name: 'Yuma' }
-]
+];
