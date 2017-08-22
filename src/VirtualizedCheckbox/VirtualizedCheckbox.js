@@ -141,7 +141,9 @@ class VirtualizedCheckbox extends Component {
   handleOkClick = () => {
     const { items, filter } = this.state;
     const checkedItems = items.filter(i => i.checked);
-    this.props.onOk(checkedItems, checkedItems.length === items.length, filter);
+    const unCheckedItems = items.filter(i => !i.checked);
+    this.props.onOk(checkedItems, unCheckedItems,
+      checkedItems.length === items.length, filter);
   };
 
   handleCancelClick = () => this.props.onCancel();
